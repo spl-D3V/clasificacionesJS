@@ -4,11 +4,7 @@
   "description": "Aplicacion para mostrar clasificaciones de carreras",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/spl-D3V/clasificacionesJS.git"
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "javascript",
@@ -23,6 +19,7 @@
   "homepage": "https://github.com/spl-D3V/clasificacionesJS#readme",
   "dependencies": {
     "express": "^4.16.4",
-    "mongoose": "^5.3.7"
+    "mongoose": "^5.3.7",
+    "nodemon": "^1.18.5"
   }
 }
