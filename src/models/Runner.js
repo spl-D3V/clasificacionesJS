@@ -5,10 +5,16 @@ let RunnerSchema = new Schema({
         type: Number,
         unique: true,
         required: [true, 'campo obligatorio'],
-        min:4,
+        min:1,
         max:4
     },
     nombre: {
+        type: String,
+        trim: true,
+        required: [true, 'campo obligatorio'],
+        minlength: 3
+    },
+    apellidos: {
         type: String,
         trim: true,
         required: [true, 'campo obligatorio'],
@@ -19,8 +25,8 @@ let RunnerSchema = new Schema({
         required: [true, 'campo obligatorio']
     },
     sexo: {
-        type: String,
-        required: [true, 'campo obligatorio']
+        type: Boolean,
+        default: true
     },
     meta: {
         type: Boolean,

@@ -4,7 +4,8 @@
   "description": "Aplicacion para mostrar clasificaciones de carreras",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "webpack": "webpack --mode development"
   },
   "keywords": [
     "javascript",
@@ -13,10 +14,6 @@
   ],
   "author": "Sebastian PL",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/spl-D3V/clasificacionesJS/issues"
-  },
-  "homepage": "https://github.com/spl-D3V/clasificacionesJS#readme",
   "dependencies": {
     "express": "^4.16.4",
     "mongoose": "^5.3.7",
