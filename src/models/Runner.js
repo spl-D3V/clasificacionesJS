@@ -25,8 +25,10 @@ let RunnerSchema = new Schema({
         required: [true, 'campo obligatorio']
     },
     sexo: {
-        type: Boolean,
-        default: true
+        type: Number,
+        default: 0,
+        min:1,
+        max:1
     },
     meta: {
         type: Boolean,
