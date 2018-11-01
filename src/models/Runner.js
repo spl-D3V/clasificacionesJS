@@ -21,8 +21,10 @@ let RunnerSchema = new Schema({
         minlength: 3
     },
     categoria: {
-        type: String,
-        required: [true, 'campo obligatorio']
+        type: Number,
+        required: [true, 'campo obligatorio'],
+        min:1,
+        max:2
     },
     sexo: {
         type: Number,

@@ -1,8 +1,8 @@
 const express = require("express");
-const passport = require("passport");
-const {Mongoose} = require('../models/db/mongoosedb');
-const {User} = require("../models/Usuario");
 const router = express.Router();
+const passport = require("passport");
+const {User} = require("../models/Usuario");
+const {userAuthenticated} = require('../middleware/checkPermissions');
 
 router.use(function(req, res, next){
     res.locals.currentUser = req.user;
@@ -12,26 +12,24 @@ router.use(function(req, res, next){
 });
 
 router.get("/", function(req, res, next){
-        res.render("index", {users:["ramiro"]});
-    }
-);
+    res.render("index");
+});
 router.get("/login", function(req, res){
     res.render("login");
-});
-
-router.post("/login", passport.authenticate('login', {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true
-}));
-router.get("/logout", function(req, res){
-    req.logout();
-    res.redirect("/");
 });
 router.get("/signup", function(req, res){
     res.render("signup");
 });
+router.get("/logout", userAuthenticated, function(req, res){
+    req.logout();
+    res.redirect("/");
+});
 
+router.post("/login", passport.authenticate('login', {
+    successRedirect: "/carrera",
+    failureRedirect: "/login",
+    failureFlash: true
+}));
 router.post("/signup", function(req, res, next){
     let username = req.body.username;
     let password = req.body.password;
@@ -48,13 +46,12 @@ router.post("/signup", function(req, res, next){
             password: password
         });
         newUser.save().then(() => {
+            req.flash("info", "Registro exitoso");
             res.redirect("/");
         }).catch((e)=>{
             res.status(404).send(e);
         });
     });
 });
-
-
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const _ = require('lodash');
 const Runner = require('../models/Runner');
 
 router.get('/:id', async(req, res) =>{
@@ -8,13 +9,15 @@ router.get('/:id', async(req, res) =>{
 });
 
 router.post('/', async(req, res)=>{
-    const Runner = new Runner(req.body);
+    let body = _.pick(req.body, ['text', 'completed']);
+    const Runner = new Runner(body);
     await Runner.save();
     res.json({status: 'Runner saved'});
 });
 
 router.put('/:id', async(req, res) =>{
-    await Runner.findByIdAndUpdate(req.params.id, req.body);
+    let body = _.pick(req.body, ['text', 'completed']);
+    await Runner.findByIdAndUpdate(req.params.id, body);
     res.json({status:'Runner updated'});
 });
 

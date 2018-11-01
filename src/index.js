@@ -1,4 +1,5 @@
 const express = require('express');
+const http = require('http');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -6,11 +7,11 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require("passport");
 let {Mongoose} = require('./models/db/mongoosedb');
-let {Runner} = require('./models/Runner');
-let {User} = require('./models/Usuario');
 let authenticate = require('./middleware/authenticate');
+const {userAuthenticated} = require('./middleware/checkPermissions');
 
 const app = express();
+const server = http.createServer(app);
 authenticate();
 // Settings
 app.set('port', process.env.PORT || 3000);;
@@ -30,12 +31,11 @@ app.use(passport.session());
 //app.use(express.json());
 // Routes
 app.use('/', require('./routes/acceso'));
-app.use('/inscripcion', require('./routes/inscripcion'));
-app.use('/carrera',require('./routes/carrera'));
-// Static files
-//app.use(express.static(__dirname+'/public'));
+app.use('/inscripcion', userAuthenticated, require('./routes/inscripcion'));
+app.use('/carrera', userAuthenticated, require('./routes/carrera'));
+app.use('/static', userAuthenticated, express.static(path.join(__dirname, 'public')));
 // Server listening
-app.listen(app.get('port'), ()=> {
-    console.log('Server on port 3000');
-    console.log(path.join(__dirname, "views"));
+server.listen(app.get('port'), function () {
+    console.log('SocketIO running' );
 });
+require('./routes/sockets')(server);

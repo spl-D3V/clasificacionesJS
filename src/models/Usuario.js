@@ -8,13 +8,19 @@ let UserSchema = new Schema({
         unique: true,
         trim: true,
         required: true,
-        min:4
+        minlength:4
     },
     password: {
         type: String,
         trim: true,
         required: true,
         minlength: 10
+    },
+    permissionLevel: {
+        type: Number,
+        default: 1,
+        min:1,
+        max:1
     },
     createdAt: {
         type: Date,
@@ -30,25 +36,6 @@ UserSchema.methods.checkPassword = function(password, done){
     let user = this;
     bcrypt.compare(password, user.password, (err, res) =>{
         done(err, res);
-    });
-}
-
-UserSchema.statics.findByCredentials = function(username, password){
-    let user = this;
-    return user.findOne({username})
-    .then((user) => {
-        if(!user){
-            return Promise.reject();
-        }
-        return new Promise((resolve, reject) => {
-            bcrypt.compare(password, user.password, (err, res) =>{
-                if(res){
-                    resolve(user);
-                }else{
-                    reject();
-                }
-            });
-        });
     });
 }
 
