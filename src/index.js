@@ -28,7 +28,6 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-//app.use(express.json());
 // Routes
 app.use('/', require('./routes/acceso'));
 app.use('/inscripcion', userAuthenticated, require('./routes/inscripcion'));
