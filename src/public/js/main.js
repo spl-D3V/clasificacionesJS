@@ -20,18 +20,34 @@ window.onload = function(){
     const senMas = document.getElementById("seniormas");
     const vetMas = document.getElementById("veteranomas");
     const formSimple = document.getElementById("dorsalSimpleForm");
+    const formCorreccion = document.getElementById("dorsalCorreccionForm");
     const idDorsal = document.getElementById("dorsal");
-
+    const idDorsalCorregir = document.getElementById("dorsalCorregir");
+    const msgAlerta = document.getElementById("mensajeAlerta");
     // eventos
     formSimple.onsubmit = function(evt){
         evt.preventDefault();
         socket.emit('send-runner', {dorsal:parseInt(idDorsal.value)});
         idDorsal.value = '';
     };
+    formCorreccion.onsubmit = function(evt){
+        let dorsalCorregir = parseInt(idDorsalCorregir.value);
+        if(!dorsalCorregir){
+            evt.preventDefault();
+            idDorsalCorregir.value = '';
+        }else{
+            socket.emit('corregir-runner', {dorsal:dorsalCorregir});
+        }
+    }
     socket.emit('newconnection', {user: "nuevo"});
     socket.on('new-runner', (data)=>{
         if(data.runner){
             rellenarTableros(data.runner);
+        }
+    });
+    socket.on('runner-corregido', (data) => {
+        if(data.refrescar){
+            msgAlerta.hidden = false;
         }
     });
     socket.on('load-old-msg',(data)=>{
@@ -41,7 +57,6 @@ window.onload = function(){
         }
     });
     function rellenarTableros(data){
-        console.log(data);
         let node = document.createElement("li");
         let textnode = document.createTextNode(' '+data.dorsal+' : '+data.nombre+' '+data.apellidos);
         node.appendChild(textnode);
@@ -104,7 +119,7 @@ window.onload = function(){
                     break;
             }
         }
-        if(data.categoria === 9){
+        if(data.categoria === 0){
             let node2 = document.createElement("li");
             let textnode2 = document.createTextNode(' '+data.dorsal+' : '+data.nombre+' '+data.apellidos);
             node2.appendChild(textnode2);

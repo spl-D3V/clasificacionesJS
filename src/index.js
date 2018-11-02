@@ -32,6 +32,7 @@ app.use(passport.session());
 app.use('/', require('./routes/acceso'));
 app.use('/inscripcion', userAuthenticated, require('./routes/inscripcion'));
 app.use('/carrera', userAuthenticated, require('./routes/carrera'));
+app.use('/general', userAuthenticated, require('./routes/general'));
 app.use('/static', userAuthenticated, express.static(path.join(__dirname, 'public')));
 // Server listening
 server.listen(app.get('port'), function () {

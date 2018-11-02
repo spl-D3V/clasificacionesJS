@@ -1,0 +1,33 @@
+<body>
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Marcha contra el cáncer</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <% if (currentUser) { %>
+                <li>Hola, <%=currentUser.name() %></li>
+                <li><a href="/logout">Desconectar</a></li>
+            <% } else { %>
+                <li><a href="/login">Log in</a></li>
+                <li><a href="/signup">Registrarse</a></li>
+            <% } %>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <% errors.forEach(function(error){ %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+    <% }) %>
+    <% infos.forEach(function(info){ %>
+        <div class="alert alert-info" role="alert">
+            <%= info %>
+        </div>
+    <% }) %>
+</div>
+<div class="alert alert-danger" role="alert" id="mensajeAlerta" hidden="true">
+    La clasificación se ha corregido, refresca la pantalla.
+</div>
+<main role="main">

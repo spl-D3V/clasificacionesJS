@@ -1,17 +1,33 @@
 const io = require('socket.io');
 const {Runner} = require('../models/Runner');
 
+function updateRunner(ndorsal, llegadameta){
+    const body = {meta: llegadameta, llegada: llegadameta ? Date.now() : null};
+    // si ha llegado a la meta, el corredor tiene estado inicial meta=false
+    // si corregimos un corredor, el corredor tiene estado inicial meta=true
+    const criteria = {dorsal: ndorsal, meta: !llegadameta}; 
+    let runner = await Runner.findOneAndUpdate(criteria, body, {new: true});
+    return runner;
+}
+
 module.exports = function(server) {
     var sockets = io.listen(server);
     sockets.on('connection', async function(socket) {
         socket.on('send-runner', async (data, cb) => {
             let iddorsal = parseInt(data.dorsal);
             if(iddorsal){
-                const body = {meta: true, llegada: Date.now()};
-                const dorsalId = {dorsal: iddorsal, meta: false};
-                let runner = await Runner.findOneAndUpdate(dorsalId, body, {new: true});
+                let runner = updateRunner(iddorsal, true);
                 if(runner){
                     sockets.emit('new-runner', {runner});
+                }
+            }
+        });
+        socket.on('corregir-runner', async (data, cb) => {
+            let iddorsal = parseInt(data.dorsal);
+            if(iddorsal){
+                let runner = updateRunner(iddorsal, false);
+                if(runner){
+                    sockets.emit('runner-corregido', {refrescar:true});
                 }
             }
         });
