@@ -41,6 +41,7 @@ window.onload = function(){
         }
     });
     function rellenarTableros(data){
+        console.log(data);
         let node = document.createElement("li");
         let textnode = document.createTextNode(' '+data.dorsal+' : '+data.nombre+' '+data.apellidos);
         node.appendChild(textnode);
@@ -104,7 +105,10 @@ window.onload = function(){
             }
         }
         if(data.categoria === 9){
-            chupFem.appendChild(node);
+            let node2 = document.createElement("li");
+            let textnode2 = document.createTextNode(' '+data.dorsal+' : '+data.nombre+' '+data.apellidos);
+            node2.appendChild(textnode2);
+            chupFem.appendChild(node2);
             chupMas.appendChild(node);
         }
     }

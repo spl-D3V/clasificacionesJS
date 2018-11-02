@@ -17,7 +17,7 @@ module.exports = function(server) {
         });
         socket.on('newconnection', async function(){
             const criteria = {meta: true};
-            const runners = await Runner.find(criteria, null, {sort: 'llegada'});;
+            const runners = await Runner.find(criteria, null, {sort: 'llegada'});
             socket.emit('load-old-msg', {list: runners});
         });
     });
