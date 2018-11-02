@@ -6,8 +6,7 @@ function updateRunner(ndorsal, llegadameta){
     // si ha llegado a la meta, el corredor tiene estado inicial meta=false
     // si corregimos un corredor, el corredor tiene estado inicial meta=true
     const criteria = {dorsal: ndorsal, meta: !llegadameta}; 
-    let runner = await Runner.findOneAndUpdate(criteria, body, {new: true});
-    return runner;
+    return [criteria, body];
 }
 
 module.exports = function(server) {
@@ -16,7 +15,8 @@ module.exports = function(server) {
         socket.on('send-runner', async (data, cb) => {
             let iddorsal = parseInt(data.dorsal);
             if(iddorsal){
-                let runner = updateRunner(iddorsal, true);
+                let criteriaUpdate = updateRunner(iddorsal, true);
+                let runner = await Runner.findOneAndUpdate(criteriaUpdate[0], criteriaUpdate[1], {new: true});
                 if(runner){
                     sockets.emit('new-runner', {runner});
                 }
@@ -25,7 +25,8 @@ module.exports = function(server) {
         socket.on('corregir-runner', async (data, cb) => {
             let iddorsal = parseInt(data.dorsal);
             if(iddorsal){
-                let runner = updateRunner(iddorsal, false);
+                let criteriaUpdate = updateRunner(iddorsal, false);
+                let runner = await Runner.findOneAndUpdate(criteriaUpdate[0], criteriaUpdate[1]);
                 if(runner){
                     sockets.emit('runner-corregido', {refrescar:true});
                 }
