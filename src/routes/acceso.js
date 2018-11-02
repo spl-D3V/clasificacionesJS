@@ -33,6 +33,7 @@ router.post("/login", passport.authenticate('login', {
 router.post("/signup", function(req, res, next){
     let username = req.body.username;
     let password = req.body.password;
+    let permiso = username === "Admin" ? 1 : 0;
     User.findOne({username}, function(err, user){
         if(err){
             return next(err);
@@ -43,7 +44,8 @@ router.post("/signup", function(req, res, next){
         }
         let newUser = new User({
             username: username,
-            password: password
+            password: password,
+            permissionLevel: permiso
         });
         newUser.save().then(() => {
             req.flash("info", "Registro exitoso");

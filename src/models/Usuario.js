@@ -18,9 +18,7 @@ let UserSchema = new Schema({
     },
     permissionLevel: {
         type: Number,
-        default: 1,
-        min:1,
-        max:1
+        default: 0,
     },
     createdAt: {
         type: Date,

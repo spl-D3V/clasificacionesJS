@@ -10,6 +10,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/general">Clasificación general</a>
                 </li>
+                <% if (currentUser.permissionLevel === 1) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/upload">Base de datos</a>
+                    </li>
+                <% } %>
             </ul>
         <% } %>
         <ul class="navbar-nav navbar-right">
