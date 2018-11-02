@@ -60,7 +60,7 @@ window.onload = function(){
         let node = document.createElement("li");
         let textnode = document.createTextNode(' '+data.dorsal+' : '+data.nombre+' '+data.apellidos);
         node.appendChild(textnode);
-        if(data.sexo === 0){
+        if(data.sexo === 1){
             switch(data.categoria){
                 case 1:
                     prebenFem.appendChild(node);
