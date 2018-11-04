@@ -10,6 +10,7 @@ const fileUpload = require('express-fileupload');
 let {Mongoose} = require('./models/db/mongoosedb');
 let authenticate = require('./middleware/authenticate');
 const {userAuthenticated} = require('./middleware/checkPermissions');
+const {adminAuthenticated} = require('./middleware/checkPermissions');
 
 const app = express();
 const server = http.createServer(app);
@@ -35,7 +36,7 @@ app.use('/', require('./routes/acceso'));
 app.use('/inscripcion', userAuthenticated, require('./routes/inscripcion'));
 app.use('/carrera', userAuthenticated, require('./routes/carrera'));
 app.use('/general', userAuthenticated, require('./routes/general'));
-app.use('/upload', userAuthenticated, require('./routes/upload'));
+app.use('/upload', adminAuthenticated, require('./routes/upload'));
 app.use('/static', userAuthenticated, express.static(path.join(__dirname, 'public')));
 // Server listening
 server.listen(app.get('port'), function () {

@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Marcha contra el cáncer</title>
-</head>
-<body>
-    <p>Utiliza el formulario para convertir el archivo.</p>
+<% include _header %>
+<% include _navbarProd %>
+<div class="container">
+    <h1>Inscripción en masa</h1>
+    <p>Sube un archivo .csv con un listado de participantes para almacenarlo en la base de datos.</p>
     <form action="/upload" method="POST" encType="multipart/form-data">
-        <input type="file" name="file" accept="*.csv" /><br/>
-        <input type="submit" class="btn btn-danger" value="Subir archivo" />
+        <div class="form-group">
+            <input type="file" name="file" class="form-control-file" accept="*.csv" />
+            <input type="submit" class="btn btn-danger" value="Subir archivo" />
+        </div>
     </form>
-</body>
-</html>
+</div>
+<% include _footer %>

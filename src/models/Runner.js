@@ -15,9 +15,29 @@ let RunnerSchema = new Schema({
         trim: true,
         minlength: 3
     },
+    camiseta:{
+        type: Boolean,
+        default: false
+    },
+    talla:{
+        type: String,
+        default: ""
+    },
+    pago:{
+        type: Number,
+        default: null
+    },
+    comentario:{
+        type: String,
+        default: ""
+    },
+    fnacimiento:{
+        type: Number,
+        default: null
+    },
     categoria: {
         type: Number,
-        default: 8
+        default: 0
     },
     sexo: {
         type: Number,

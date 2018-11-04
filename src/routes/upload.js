@@ -1,6 +1,6 @@
 const express = require("express");
-const router = express.Router();
 const csv = require('fast-csv');
+const router = express.Router();
 const {Runner} = require("../models/Runner");
 const nentries = 500;
 
@@ -26,7 +26,7 @@ router.post('/', function (req, res) {
              nombre: data[2],
              categoria: data[3],
              sexo: data[4]
-         })
+         });
          runners.push(runner);
          if (runners.length === nentries){
             Runner.collection.insertMany(runners, function(err, documents) {
@@ -45,7 +45,8 @@ router.post('/', function (req, res) {
             }
         });
         totalentries += runners.length
-        res.send(totalentries + ' entradas subidas a base de datos.');
+        req.flash("info", totalentries + ' entradas subidas a base de datos correctamente');
+        res.redirect("/upload");
      });
 });
 
