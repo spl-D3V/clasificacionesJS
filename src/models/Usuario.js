@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const _ = require('lodash');
 const {Schema} = mongoose;
 
 let UserSchema = new Schema({
@@ -28,6 +29,11 @@ let UserSchema = new Schema({
 
 UserSchema.methods.name = function(){
     return this.username;
+};
+UserSchema.methods.toJSON = function(){
+    let user = this;
+    let userObject = user.toObject();
+    return _.pick(userObject, ['username', 'permissionLevel']);
 };
 
 UserSchema.methods.checkPassword = function(password, done){

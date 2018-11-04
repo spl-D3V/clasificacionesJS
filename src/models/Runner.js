@@ -3,17 +3,20 @@ const {Schema} = mongoose;
 let RunnerSchema = new Schema({
     dorsal: {
         type: Number,
-        unique: true
+        unique: true,
+        required: true
     },
     nombre: {
         type: String,
         trim: true,
-        minlength: 3
+        minlength: 3,
+        required: true
     },
     apellidos: {
         type: String,
         trim: true,
-        minlength: 3
+        minlength: 3,
+        required: true
     },
     camiseta:{
         type: Boolean,
@@ -37,11 +40,13 @@ let RunnerSchema = new Schema({
     },
     categoria: {
         type: Number,
-        default: 0
+        default: 0,
+        required: true
     },
     sexo: {
         type: Number,
-        default: 0
+        default: 0,
+        required: true
     },
     meta: {
         type: Boolean,

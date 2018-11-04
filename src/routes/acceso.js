@@ -5,7 +5,7 @@ const {User} = require("../models/Usuario");
 const {userAuthenticated} = require('../middleware/checkPermissions');
 
 router.use(function(req, res, next){
-    res.locals.currentUser = req.user;
+    res.locals.currentUser = req.user ? req.user.toJSON() : undefined;
     res.locals.errors = req.flash("error");
     res.locals.infos = req.flash("info");
     next();

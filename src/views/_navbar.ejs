@@ -6,7 +6,7 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <% if (currentUser) { %>
-                <li>Hola, <%=currentUser.name() %></li>
+                <li>Hola, <%=currentUser.username %></li>
                 <li><a href="/logout">Desconectar</a></li>
             <% } else { %>
                 <li><a href="/login">Log in</a></li>

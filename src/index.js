@@ -9,8 +9,7 @@ const passport = require("passport");
 const fileUpload = require('express-fileupload');
 let {Mongoose} = require('./models/db/mongoosedb');
 let authenticate = require('./middleware/authenticate');
-const {userAuthenticated} = require('./middleware/checkPermissions');
-const {adminAuthenticated} = require('./middleware/checkPermissions');
+const {userAuthenticated, adminAuthenticated} = require('./middleware/checkPermissions');
 
 const app = express();
 const server = http.createServer(app);
