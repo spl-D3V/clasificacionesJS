@@ -1,0 +1,50 @@
+<% include _header %>
+<% include _navbarProd %>
+<div class="container">
+    <form action="/inscripcion/runner" method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="fnacimiento">Año de nacimiento</label>
+                <input type="text" class="form-control" id="fnacimiento" placeholder="1950">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="dorsal">Dorsal</label>
+                <input type="text" class="form-control" id="dorsal" placeholder="Dorsal">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="categoria">Categoría</label>
+                <input type="text" class="form-control" id="categoria" placeholder="Categoría">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="sexo">Sexo</label>
+                <input type="text" class="form-control" id="sexo" placeholder="Sexo">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="camiseta">Camiseta</label>
+                <input type="text" class="form-control" id="camiseta" placeholder="camiseta">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="talla">Talla</label>
+                <input type="text" class="form-control" id="talla" placeholder="talla">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="pago">Pago</label>
+                <input type="text" class="form-control" id="pago" placeholder="pago">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+</div>
+<% include _footer %>

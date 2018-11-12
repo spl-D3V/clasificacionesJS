@@ -1,3 +1,4 @@
+require('./config/config');
 const express = require('express');
 const http = require('http');
 const path = require('path');
@@ -15,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 authenticate();
 // Settings
-app.set('port', process.env.PORT || 3000);;
+app.set('port', process.env.PORT);;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 // Middlewares
@@ -23,7 +24,7 @@ app.use(fileUpload());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(session({
-    secret:"añlsdkjf97qwer79q87ewr",
+    secret:process.env.SESION_SECRET,
     resave: true,
     saveUninitialized: true
 }));
