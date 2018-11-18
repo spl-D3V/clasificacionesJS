@@ -26,7 +26,7 @@ router.get("/logout", userAuthenticated, function(req, res){
 });
 
 router.post("/login", passport.authenticate('login', {
-    successRedirect: "/carrera",
+    successRedirect: "/inscripcion",
     failureRedirect: "/login",
     failureFlash: true
 }));

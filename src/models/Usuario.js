@@ -33,7 +33,7 @@ UserSchema.methods.name = function(){
 UserSchema.methods.toJSON = function(){
     let user = this;
     let userObject = user.toObject();
-    return _.pick(userObject, ['username', 'permissionLevel']);
+    return _.pick(userObject, ['_id','username', 'permissionLevel']);
 };
 
 UserSchema.methods.checkPassword = function(password, done){

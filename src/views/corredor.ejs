@@ -1,50 +1,117 @@
 <% include _header %>
+<script src="/static/js/corredor.js"></script>
 <% include _navbarProd %>
 <div class="container">
-    <form>
+    <form id="formCorredor">
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" value="<%= runner.nombre %>" id="nombre" placeholder="Nombre">
+                <input type="text" required minlength="2" class="form-control" value="<%= runner.nombre %>" name="nombre" placeholder="Nombre">
             </div>
             <div class="form-group col-md-4">
                 <label for="apellidos">Apellidos</label>
-                <input type="text" class="form-control" value="<%= runner.apellidos %>" id="apellidos" placeholder="Apellidos">
+                <input type="text" required minlength="2" class="form-control" value="<%= runner.apellidos %>" name="apellidos" placeholder="Apellidos">
             </div>
             <div class="form-group col-md-4">
                 <label for="fnacimiento">Año de nacimiento</label>
-                <input type="text" class="form-control" value="<%= runner.fnacimiento %>" id="fnacimiento" placeholder="1950">
+                <input type="number" required min="1900" max="2100" class="form-control" value="<%= runner.fnacimiento %>" name="fnacimiento" placeholder="1950">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="dorsal">Dorsal</label>
-                <input type="text" class="form-control" value="<%= runner.dorsal %>" id="dorsal" placeholder="Dorsal">
+                <% if (runner) {%>
+                    <input type="number" required min="1" class="form-control" value="<%= runner.dorsal %>" readonly name="dorsal" id="dorsal" placeholder="Dorsal">
+                <% } else { %>
+                    <input type="number" required min="1" class="form-control" name="dorsal" id="dorsal" placeholder="Dorsal">
+                <% } %>
             </div>
             <div class="form-group col-md-4">
                 <label for="categoria">Categoría</label>
-                <input type="text" class="form-control" value="<%= runner.categoria %>" id="categoria" placeholder="Categoría">
+                <select class="form-control" name="categoria">
+                    <% if (runner.categoria === 0) {%>
+                        <option id="c0" value="0" selected>Chupetines</option>
+                    <% } else { %>
+                        <option id="c0" value="0">Chupetines</option>
+                    <% } %>
+                    <% if (runner.categoria === 1) {%>
+                        <option id="c1" value="1" selected>Prebenjamin</option>
+                    <% } else { %>
+                        <option id="c1" value="1">Prebenjamin</option>
+                    <% } %>
+                    <% if (runner.categoria === 2) {%>
+                        <option id="c2" value="2" selected>Benjamin</option>
+                    <% } else { %>
+                        <option id="c2" value="2">Benjamin</option>
+                    <% } %>
+                    <% if (runner.categoria === 3) {%>
+                        <option id="c3" value="3" selected>Alevin</option>
+                    <% } else { %>
+                        <option id="c3" value="3">Alevin</option>
+                    <% } %>
+                    <% if (runner.categoria === 4) {%>
+                        <option id="c4" value="4" selected>Infantil</option>
+                    <% } else { %>
+                        <option id="c4" value="4">Infantil</option>
+                    <% } %>
+                    <% if (runner.categoria === 5) {%>
+                        <option id="c5" value="5" selected>Cadete</option>
+                    <% } else { %>
+                        <option id="c5" value="5">Cadete</option>
+                    <% } %>
+                    <% if (runner.categoria === 6) {%>
+                        <option id="c6" value="6" selected>Junior</option>
+                    <% } else { %>
+                        <option id="c6" value="6">Junior</option>
+                    <% } %>
+                    <% if (runner.categoria === 7) {%>
+                        <option id="c7" value="7" selected>Senior</option>
+                    <% } else { %>
+                        <option id="c7" value="7">Senior</option>
+                    <% } %>
+                    <% if (runner.categoria === 8) {%>
+                        <option id="c8" value="8" selected>Veterano</option>
+                    <% } else { %>
+                        <option id="c8" value="8">Veterano</option>
+                    <% } %>
+                </select>
             </div>
             <div class="form-group col-md-4">
                 <label for="sexo">Sexo</label>
-                <input type="text" class="form-control" value="<%= runner.sexo %>" id="sexo" placeholder="Sexo">
+                <select class="form-control" name="sexo">
+                    <% if (runner.sexo === 0) {%>
+                        <option id="s0" value="0" selected>Hombre</option>
+                    <% } else { %>
+                        <option id="s0" value="0">Hombre</option>
+                    <% } %>
+                    <% if (runner.sexo === 1) {%>
+                        <option id="s1" value="1" selected>Mujer</option>
+                    <% } else { %>
+                        <option id="s1" value="1">Mujer</option>
+                    <% } %>
+                </select>
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="camiseta">Camiseta</label>
-                <input type="text" class="form-control" value="<%= runner.camiseta %>" id="camiseta" placeholder="camiseta">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="talla">Talla</label>
-                <input type="text" class="form-control" value="<%= runner.talla %>" id="talla" placeholder="talla">
+            <div class="form-group col-md-4" >
+                <div class="form-check">
+                    <% let checked = runner.camiseta ? "checked" : "" %>
+                    <input type="checkbox" class="form-check-input" <%= checked %> value="true" id="camiseta" name="camiseta">
+                    <label class="form-check-label" for="camiseta">Camiseta</label>
+                </div>
+                <input type="text" class="form-control" value="<%= runner.talla %>" name="talla" id="talla" hidden="true" placeholder="talla">
             </div>
             <div class="form-group col-md-4">
                 <label for="pago">Pago</label>
-                <input type="text" class="form-control" value="<%= runner.pago %>" id="pago" placeholder="pago">
+                <input type="number" required class="form-control" value="<%= runner.pago %>" name="pago" placeholder="pago">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="comentario">Comentario</label>
+                <textarea class="form-control" name="comentario" placeholder="Comentario"></textarea>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
+        <button type="button" class="btn btn-primary" id="btnUpdate">Actualizar</button>
+        <button type="button" class="btn btn-danger" id="btnBorrar">Borrar</button>
     </form>
 </div>
 <% include _footer %>

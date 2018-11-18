@@ -9,28 +9,43 @@ router.get('/', async(req, res) =>{
 });
 router.get('/runner/:id', async(req, res) =>{
     const runner = await Runner.findOne({dorsal:req.params.id});
-    res.render("corredor", {runner});
+    if (runner){
+        res.render("corredor", {runner});
+    }else{
+        res.redirect("/inscripcion");
+    }
+    
 });
 router.get('/runner', async(req, res) =>{
     res.render("corredornuevo");
 });
 router.post('/runner', async(req, res)=>{
-    let body = _.pick(req.body, ['nombre', 'apellidos', 'dorsal', 'sexo', 'categoria']);
+    let body = _.pick(req.body, ['nombre', 'apellidos', 'camiseta', 
+    'talla', 'pago', 'comentario', 'fnacimiento', 'dorsal', 'sexo', 'categoria']);
     console.log(body);
-    console.log(req.body);
-    //const runner = new Runner(body);
-    //await runner.save();
-    res.json({status: 'Runner saved'});
+    const runner = new Runner(body);
+    await runner.save();
+    res.redirect('/inscripcion/runner/'+runner.dorsal);
 });
-router.put('runner/:id', async(req, res) =>{
-    let body = _.pick(req.body, ['text', 'completed']);
-    await Runner.findByIdAndUpdate(req.params.id, body);
-    res.json({status:'Runner updated'});
+router.put('/runner/:id', async(req, res) =>{
+    let body = _.pick(req.body, ['nombre', 'apellidos', 'camiseta', 
+    'talla', 'pago', 'comentario', 'fnacimiento', 'dorsal', 'sexo', 'categoria']);
+    if(!body.hasOwnProperty('camiseta')){
+        body.camiseta = false;
+    }
+    console.log(body);
+    let runner = await Runner.findOneAndUpdate({dorsal:req.params.id}, body, {new: true});
+    res.render("corredor", {runner});
 });
-router.delete('runner/:id', async(req, res) =>{
-    let body = _.pick(req.body, ['text', 'completed']);
-    await Runner.deleteOne(req.params.id, body);
-    res.json({status:'Runner updated'});
+router.delete('/runner/:id', async(req, res) =>{
+    let dorsalid = parseInt(req.params.id);
+    if(dorsalid){
+        await Runner.deleteOne({dorsal:dorsalid});
+        res.statusCode = 301;
+        res.render("corredornuevo");
+    }
+    res.statusCode = 404;
+    res.send();
 });
 
 module.exports = router;

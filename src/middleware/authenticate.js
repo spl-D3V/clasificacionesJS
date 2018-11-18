@@ -16,7 +16,7 @@ passport.use('login', new LocalStrategy(
                     return done(err);
                 }
                 if(res){
-                    return done(null, user);
+                    return done(null, user.toJSON());
                 }else{
                     return done(null, false, {message:"Password erroneo"});
                 }
