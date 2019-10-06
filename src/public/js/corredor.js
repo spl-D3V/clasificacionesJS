@@ -5,6 +5,7 @@ window.addEventListener("load", function () {
     const dorsal = this.document.getElementById("dorsal");
     const camiseta = this.document.getElementById("camiseta");
     const talla = this.document.getElementById("talla");
+    console.log('hola');
     formCorredor.addEventListener('submit', function(evt){
         evt.preventDefault();
     });
@@ -16,7 +17,6 @@ window.addEventListener("load", function () {
         if(formCorredor.reportValidity()){
             const xhr = new XMLHttpRequest();
             const fd = new FormData(formCorredor);
-            console.log(fd);
             xhr.open("PUT", "/inscripcion/runner/"+dorsal.value);
             xhr.send(fd);
         }

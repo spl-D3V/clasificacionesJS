@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
 const {Runner} = require('../models/Runner');
+const {category} = require('../helpers/helpers');
 
 router.get('/', async(req, res) =>{
     let listrunner = await Runner.find({}, 'nombre apellidos dorsal', {sort:'apellidos'});
@@ -21,19 +22,18 @@ router.get('/runner', async(req, res) =>{
 });
 router.post('/runner', async(req, res)=>{
     let body = _.pick(req.body, ['nombre', 'apellidos', 'camiseta', 
-    'talla', 'pago', 'comentario', 'fnacimiento', 'dorsal', 'sexo', 'categoria']);
-    console.log(body);
+    'talla', 'pago', 'comentario', 'fnacimiento', 'dorsal', 'sexo']);
     const runner = new Runner(body);
     await runner.save();
     res.redirect('/inscripcion/runner/'+runner.dorsal);
 });
 router.put('/runner/:id', async(req, res) =>{
     let body = _.pick(req.body, ['nombre', 'apellidos', 'camiseta', 
-    'talla', 'pago', 'comentario', 'fnacimiento', 'dorsal', 'sexo', 'categoria']);
+    'talla', 'pago', 'comentario', 'fnacimiento', 'dorsal', 'sexo']);
     if(!body.hasOwnProperty('camiseta')){
         body.camiseta = false;
     }
-    console.log(body);
+    body.categoria = category(body.fnacimiento);
     let runner = await Runner.findOneAndUpdate({dorsal:req.params.id}, body, {new: true});
     res.render("corredor", {runner});
 });

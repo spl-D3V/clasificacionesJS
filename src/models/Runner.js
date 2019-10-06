@@ -1,3 +1,4 @@
+const {category} = require('../helpers/helpers');
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 let RunnerSchema = new Schema({
@@ -40,8 +41,7 @@ let RunnerSchema = new Schema({
     },
     categoria: {
         type: Number,
-        default: 0,
-        required: true
+        default: 0
     },
     sexo: {
         type: Number,
@@ -56,6 +56,13 @@ let RunnerSchema = new Schema({
         type: Number,
         default: null
     }
+});
+
+RunnerSchema.pre('save', function(next){
+    const runner = this;
+    const anio = runner.fnacimiento;
+    runner.categoria = category(anio);
+    next();
 });
 
 let Runner = mongoose.model('Runners', RunnerSchema);

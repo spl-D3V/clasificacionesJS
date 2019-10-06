@@ -13,12 +13,6 @@
                 <input type="text" required minlength="2" class="form-control" value="<%= runner.apellidos %>" name="apellidos" placeholder="Apellidos">
             </div>
             <div class="form-group col-md-4">
-                <label for="fnacimiento">Año de nacimiento</label>
-                <input type="number" required min="1900" max="2100" class="form-control" value="<%= runner.fnacimiento %>" name="fnacimiento" placeholder="1950">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
                 <label for="dorsal">Dorsal</label>
                 <% if (runner) {%>
                     <input type="number" required min="1" class="form-control" value="<%= runner.dorsal %>" readonly name="dorsal" id="dorsal" placeholder="Dorsal">
@@ -26,9 +20,15 @@
                     <input type="number" required min="1" class="form-control" name="dorsal" id="dorsal" placeholder="Dorsal">
                 <% } %>
             </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="fnacimiento">Año de nacimiento</label>
+                <input type="number" required min="1900" max="2100" class="form-control" value="<%= runner.fnacimiento %>" name="fnacimiento" placeholder="1950">
+            </div>
             <div class="form-group col-md-4">
                 <label for="categoria">Categoría</label>
-                <select class="form-control" name="categoria">
+                <select class="form-control" name="categoria" disabled>
                     <% if (runner.categoria === 0) {%>
                         <option id="c0" value="0" selected>Chupetines</option>
                     <% } else { %>
@@ -99,7 +99,7 @@
                     <input type="checkbox" class="form-check-input" <%= checked %> value="true" id="camiseta" name="camiseta">
                     <label class="form-check-label" for="camiseta">Camiseta</label>
                 </div>
-                <input type="text" class="form-control" value="<%= runner.talla %>" name="talla" id="talla" hidden="true" placeholder="talla">
+                <input type="text" class="form-control" value="<%= runner.talla %>" name="talla" id="talla" placeholder="talla">
             </div>
             <div class="form-group col-md-4">
                 <label for="pago">Pago</label>

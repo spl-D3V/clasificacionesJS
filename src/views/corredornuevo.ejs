@@ -5,35 +5,21 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="nombre">Nombre</label>
-                <input type="text" required minlength="2" class="form-control" name="nombre" placeholder="Nombre">
+                <input type="text" required minlength="3" class="form-control" name="nombre" placeholder="Nombre">
             </div>
             <div class="form-group col-md-4">
                 <label for="apellidos">Apellidos</label>
-                <input type="text" required minlength="2" class="form-control" name="apellidos" placeholder="Apellidos">
+                <input type="text" required minlength="3" class="form-control" name="apellidos" placeholder="Apellidos">
             </div>
-            <div class="form-group col-md-4">
-                <label for="fnacimiento">Año de nacimiento</label>
-                <input type="number" required min="1900" max="2100" class="form-control" name="fnacimiento" placeholder="1950">
-            </div>
-        </div>
-        <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="dorsal">Dorsal</label>
                 <input type="number" required min="1" class="form-control" name="dorsal" placeholder="Dorsal">
             </div>
+        </div>
+        <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="categoria">Categoría</label>
-                <select class="form-control" name="categoria">
-                    <option id="c0" value="0">Chupetines</option>
-                    <option id="c1" value="1">Prebenjamin</option>
-                    <option id="c2" value="2">Benjamin</option>
-                    <option id="c3" value="3">Alevin</option>
-                    <option id="c4" value="4">Infantil</option>
-                    <option id="c5" value="5">Cadete</option>
-                    <option id="c6" value="6">Junior</option>
-                    <option id="c7" value="7">Senior</option>
-                    <option id="c8" value="8">Veterano</option>
-                </select>
+                <label for="fnacimiento">Año de nacimiento</label>
+                <input type="number" required min="1900" max="2019" class="form-control" name="fnacimiento" placeholder="1950">
             </div>
             <div class="form-group col-md-4">
                 <label for="sexo">Sexo</label>
