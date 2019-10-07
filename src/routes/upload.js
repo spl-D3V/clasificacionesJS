@@ -33,7 +33,6 @@ router.post('/', function (req, res) {
              talla: data[7],
              camiseta: (!data[7] || 0 === data[7].length) ? false : true
          });
-         console.log(runner);
          runners.push(runner);
          if (runners.length === nentries){
             Runner.collection.insertMany(runners, function(err, documents) {
