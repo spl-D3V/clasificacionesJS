@@ -17,6 +17,8 @@ function category(anio){
         return 7;
     }else if(anio < 1983){
         return 8;
+    }else{
+        return 9;
     }
 };
 

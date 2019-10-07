@@ -2,6 +2,7 @@ const express = require("express");
 const csv = require('fast-csv');
 const router = express.Router();
 const {Runner} = require("../models/Runner");
+const {category} = require('../helpers/helpers')
 const nentries = 500;
 
 router.get('/', function (req, res) {
@@ -20,13 +21,19 @@ router.post('/', function (req, res) {
          ignoreEmpty: false
      })
      .on("data", function(data){
+         let anio = parseInt(data[3]);
          let runner = new Runner({
              dorsal: parseInt(data[0]),
              apellidos: data[1],
              nombre: data[2],
-             categoria: data[3],
-             sexo: data[4]
+             fnacimiento: isNaN(anio) ? 2019 : anio,
+             sexo: data[4] === 'MUJER' ? 1 : 0,
+             categoria: category(anio),
+             pago: data[6],
+             talla: data[7],
+             camiseta: (!data[7] || 0 === data[7].length) ? false : true
          });
+         console.log(runner);
          runners.push(runner);
          if (runners.length === nentries){
             Runner.collection.insertMany(runners, function(err, documents) {
