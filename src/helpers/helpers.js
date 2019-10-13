@@ -22,4 +22,60 @@ function category(anio){
     }
 };
 
-module.exports = {category};
+function transCategoria(catid){
+    let label = "";
+    switch (catid) {
+        case 0:
+            label = "Chupetines";
+            break;
+        case 1:
+            label = "Prebenjamin";
+            break;
+        case 2:
+            label = "Benjamin";
+            break;
+        case 3:
+            label = "Alevin";
+            break;
+        case 4:
+            label = "Infantil";
+            break;
+        case 5:
+            label = "Cadete";
+            break;
+        case 6:
+            label = "Junior";
+            break;
+        case 7:
+            label = "Senior";
+            break;
+        case 8:
+            label = "Veterano";
+            break;
+        case 9:
+            label = "Mascota";
+            break;
+        default:
+            label = "Desconocido";
+            break;
+    }
+    return label;
+}
+
+function transSexo(catid){
+    let label = "";
+    switch (catid) {
+        case 0:
+            label = "Hombre";
+            break;
+        case 1:
+            label = "Mujer";
+            break;
+        default:
+            label = "Desconocido";
+            break;
+    }
+    return label;
+}
+
+module.exports = {category, transCategoria, transSexo};
