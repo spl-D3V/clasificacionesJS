@@ -37,8 +37,8 @@ app.use('/inscripcion', userAuthenticated, require('./routes/inscripcion'));
 app.use('/carrera', userAuthenticated, require('./routes/carrera'));
 app.use('/general', userAuthenticated, require('./routes/general'));
 app.use('/upload', adminAuthenticated, require('./routes/upload'));
-app.use('/statistics', require('./routes/statistics'));
-app.use('/static', userAuthenticated, express.static(path.join(__dirname, 'public')));
+app.use('/statistics', userAuthenticated, require('./routes/statistics'));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 // Server listening
 server.listen(app.get('port'), function () {
     console.log('SocketIO running' );

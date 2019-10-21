@@ -60,7 +60,7 @@ function transCategoria(catid){
             break;
     }
     return label;
-}
+};
 
 function transSexo(catid){
     let label = "";
@@ -76,6 +76,6 @@ function transSexo(catid){
             break;
     }
     return label;
-}
+};
 
 module.exports = {category, transCategoria, transSexo};

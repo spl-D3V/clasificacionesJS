@@ -3,6 +3,9 @@ const router = express.Router();
 const {Runner} = require('../models/Runner');
 const {transCategoria, transSexo} = require('../helpers/helpers');
 
+router.get('/', (req, res)=> {
+    res.render("estadisticas");
+});
 router.get('/total', async(req, res) =>{
     const nrunners = await Runner.count();
     res.json({total:nrunners});
@@ -24,34 +27,40 @@ router.get('/totalcategorias', async(req, res) =>{
 });
 router.get('/categoria/:id', async(req, res) =>{
     const catId = parseInt(req.params.id);
-    if(catId){
+    if(isNaN(catId)){
+        res.json({});
+    }else{
         const total = await Runner.aggregate([
             {
                 $match:{categoria: catId}
             },
             {
+                $sort:{sexo:1}
+            },
+            {
                 $group:{"_id":"$sexo", "total": { "$sum": 1 }}
             }
         ]).then((result) =>{
-            const data ={};
-            result.forEach(x => data[transSexo(x._id)] = x.total);
+            const data =[];
+            result.forEach(x => data.push([transSexo(x._id), x.total]));
             return data;
         }).catch((error)=>{
             console.log('E2 : ',error);
         });
         res.json(total);
-    }else{
-        res.json({});
     }
 });
 router.get('/totalsexos', async(req, res)=>{
     const total = await Runner.aggregate([
         {
+            $sort:{sexo:1}
+        },
+        {
             $group:{"_id":"$sexo", "total": { "$sum": 1 }}
         }
     ]).then((result) =>{
-        const data ={};
-        result.forEach(x => data[transSexo(x._id)] = x.total);
+        const data =[];
+        result.forEach(x => data.push([transSexo(x._id), x.total]));
         return data;
     }).catch((error)=>{
         console.log('E1 : ',error);
