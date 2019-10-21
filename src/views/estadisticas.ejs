@@ -1,0 +1,129 @@
+<% include _header %>
+<script src="/static/js/Chart.min.js"></script>
+<script src="/static/js/mainStats.js"></script>
+<% include _navbarProd %>
+<div class="container-fluid">
+    <div class="row my-3">
+        <div class="col">
+            <h4>Participantes: </h4>
+            <h4>Recaudación: </h4>
+        </div>
+    </div>
+    <div class="row py-2">
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Total por categorias</h5>
+                <div class="card-body">
+                    <canvas id="cCategorias"></canvas>
+                    <a href="" id="btnCategorias" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Total por sexos</h5>
+                <div class="card-body">
+                    <canvas id="cSexos"></canvas>
+                    <a href="" id="btnSexos" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Mascotas</h5>
+                <div class="card-body">
+                    <canvas id="cMascotas"></canvas>
+                    <a href="" id="btnMascotas" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-2">
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Chupetines</h5>
+                <div class="card-body">
+                    <canvas id="cChupetin"></canvas>
+                    <a href="" id="btnChupetin" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Prebenjamines</h5>
+                <div class="card-body">
+                    <canvas id="cPrebenjamin"></canvas>
+                    <a href="" id="btnPrebenjamin" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Benjamines</h5>
+                <div class="card-body">
+                    <canvas id="cBenjamin"></canvas>
+                    <a href="" id="btnBenjamin" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-2">
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Alevines</h5>
+                <div class="card-body">
+                    <canvas id="cAlevin"></canvas>
+                    <a href="" id="btnAlevin" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Infantiles</h5>
+                <div class="card-body">
+                    <canvas id="cInfantil"></canvas>
+                    <a href="" id="btnInfantil" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Cadetes</h5>
+                <div class="card-body">
+                    <canvas id="cCadete"></canvas>
+                    <a href="" id="btnCadete" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-2">
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Juniors</h5>
+                <div class="card-body">
+                    <canvas id="cJunior"></canvas>
+                    <a href="" id="btnJunior" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Seniors</h5>
+                <div class="card-body">
+                    <canvas id="cSenior"></canvas>
+                    <a href="" id="btnSenior" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <h5 class="card-header">Veteranos</h5>
+                <div class="card-body">
+                    <canvas id="cVeterano"></canvas>
+                    <a href="" id="btnVeterano" class="btn btn-primary">Actualizar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include _footer %>

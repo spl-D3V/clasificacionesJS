@@ -26,7 +26,6 @@ window.addEventListener("load", function () {
             const xhr = new XMLHttpRequest();
             xhr.addEventListener('readystatechange', function(){
                 if(xhr.status === 301){
-                    console.log(xhr.readyState);
                     window.location = "/inscripcion"
                 }
             });
