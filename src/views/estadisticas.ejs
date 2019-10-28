@@ -5,8 +5,8 @@
 <div class="container-fluid">
     <div class="row my-3">
         <div class="col">
-            <h4>Participantes: </h4>
-            <h4>Recaudación: </h4>
+            <h4>Participantes: <%= resultados[0] %></h4>
+            <h4>Recaudación: <%= resultados[1].total %> &euro;</h4>
         </div>
     </div>
     <div class="row py-2">
@@ -124,6 +124,30 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row py-2">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <h5 class="card-header">Camisetas</h5>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr><th scope="col">Talla</th><th scope="col">Total</th></tr>
+                        </thead>
+                        <tbody>
+                            <% for (let [k, v] of Object.entries(resultados[2])){ %>
+                                <tr>
+                                    <td><%= k %></td>
+                                    <td><span class="badge badge-primary badge-pill"><%= v %></span></td>
+                                </tr>
+                            <% }; %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 <% include _footer %>

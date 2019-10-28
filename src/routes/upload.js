@@ -24,13 +24,13 @@ router.post('/', function (req, res) {
          let anio = parseInt(data[3]);
          let runner = new Runner({
              dorsal: parseInt(data[0]),
-             apellidos: data[1],
-             nombre: data[2],
+             apellidos: data[1].trim(),
+             nombre: data[2].trim(),
              fnacimiento: isNaN(anio) ? 2019 : anio,
              sexo: data[4] === 'MUJER' ? 1 : 0,
              categoria: category(anio),
              pago: data[6],
-             talla: data[7],
+             talla: data[7].trim(),
              camiseta: (!data[7] || 0 === data[7].length) ? false : true
          });
          runners.push(runner);

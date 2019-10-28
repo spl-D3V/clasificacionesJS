@@ -15,7 +15,6 @@ router.get('/runner/:id', async(req, res) =>{
     }else{
         res.redirect("/inscripcion");
     }
-    
 });
 router.get('/runner', async(req, res) =>{
     res.render("corredornuevo");

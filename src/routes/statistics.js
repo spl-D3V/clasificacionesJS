@@ -3,8 +3,17 @@ const router = express.Router();
 const {Runner} = require('../models/Runner');
 const {transCategoria, transSexo} = require('../helpers/helpers');
 
-router.get('/', (req, res)=> {
-    res.render("estadisticas");
+router.get('/', async (req, res)=> {
+    const jobs =[
+        Runner.count(), 
+        Runner.aggregate([ { $group:{"_id":null, "total": { "$sum": "$pago" }} } ])
+                .then((result) =>{ return {'total':result[0].total}; })
+                .catch((error)=>{ console.log('E2 : ',error); }),
+        Runner.aggregate([ { $match:{camiseta: true} }, { $group:{"_id":"$talla", "total": { "$sum": 1 }} } ])
+                .then((result) =>{ const data ={}; result.forEach(x => data[x._id] = x.total); return data; })
+                .catch((error)=>{ console.log('E2 : ',error); })];
+    const resultados = await Promise.all(jobs).then(x => {return x;}).catch(err => console.log(err));
+    res.render("estadisticas", {resultados});
 });
 router.get('/total', async(req, res) =>{
     const nrunners = await Runner.count();
