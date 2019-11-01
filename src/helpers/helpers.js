@@ -3,23 +3,23 @@ function category(anio){
         return 9;
     }
     anio = parseInt(anio);
-    if (anio > 2014){
+    if (anio > 2013){
         return 0; // chu
-    }else if(anio > 2012){
+    }else if(anio > 2011){
         return 1; // pre
-    }else if(anio > 2010){
+    }else if(anio > 2009){
         return 2; // ben
-    }else if(anio > 2008){
+    }else if(anio > 2007){
         return 3; // ale 
-    }else if(anio > 2006){
+    }else if(anio > 2005){
         return 4; // inf
-    }else if(anio > 2004){
+    }else if(anio > 2003){
         return 5; // cad
-    }else if(anio > 2001){
+    }else if(anio > 2000){
         return 6; // jun
-    }else if(anio > 1982){
+    }else if(anio > 1981){
         return 7; // sen
-    }else if(anio < 1983){
+    }else if(anio < 1982){
         return 8; // vet
     }else{
         return 10;
