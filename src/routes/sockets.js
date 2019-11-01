@@ -14,7 +14,7 @@ module.exports = function(server) {
     sockets.on('connection', async function(socket) {
         socket.on('send-runner', async (data, cb) => {
             let iddorsal = parseInt(data.dorsal);
-            if(iddorsal){
+            if(!isNaN(iddorsal)){
                 let criteriaUpdate = updateRunner(iddorsal, true);
                 let runner = await Runner.findOneAndUpdate(criteriaUpdate[0], criteriaUpdate[1], {new: true});
                 if(runner){
@@ -24,7 +24,7 @@ module.exports = function(server) {
         });
         socket.on('corregir-runner', async (data, cb) => {
             let iddorsal = parseInt(data.dorsal);
-            if(iddorsal){
+            if(!isNaN(iddorsal)){
                 let criteriaUpdate = updateRunner(iddorsal, false);
                 let runner = await Runner.findOneAndUpdate(criteriaUpdate[0], criteriaUpdate[1]);
                 if(runner){

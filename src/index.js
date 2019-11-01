@@ -38,6 +38,7 @@ app.use('/carrera', userAuthenticated, require('./routes/carrera'));
 app.use('/general', userAuthenticated, require('./routes/general'));
 app.use('/upload', adminAuthenticated, require('./routes/upload'));
 app.use('/statistics', userAuthenticated, require('./routes/statistics'));
+app.use('/listados', require('./routes/listados'));
 app.use('/static', express.static(path.join(__dirname, 'public')));
 // Server listening
 server.listen(app.get('port'), function () {

@@ -1,124 +1,135 @@
 <% include _header %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js" charset="UTF-8"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/static/js/main.js"></script>
 <% include _navbarProd %>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-5">
-            <h1>Llegada</h1>
-            <form  id="dorsalSimpleForm" action="" method="" class="form-inline">
-                <div class="form-group mx-sm-1 mb-2">
-                    <input type="text" class="form-control" id="dorsal" placeholder="Dorsal">
-                    <input type="submit" class="btn btn-primary" value="Meta!">
+<div class="row">
+    <div class="col-md-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <h1>Llegada</h1>
+                    <form  id="dorsalSimpleForm" action="" method="" class="form-inline">
+                        <div class="form-group mx-sm-1 mb-2">
+                            <input type="text" class="form-control" id="dorsal" placeholder="Dorsal">
+                            <input type="submit" class="btn btn-primary" value="Meta!">
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-5">
-            <h1>Corrección de llegada</h1>
-            <form  id="dorsalCorreccionForm" action="" method="" class="form-inline">
-                <div class="form-group mx-sm-1 mb-2">
-                    <input type="text" class="form-control" id="dorsalCorregir" placeholder="Dorsal">
-                    <input type="submit" class="btn btn-danger" value="Corregir!">
+                <div class="col-md-2">
                 </div>
-            </form>
+                <div class="col-md-5">
+                    <h1>Corrección de llegada</h1>
+                    <form  id="dorsalCorreccionForm" action="" method="" class="form-inline">
+                        <div class="form-group mx-sm-1 mb-2">
+                            <input type="text" class="form-control" id="dorsalCorregir" placeholder="Dorsal">
+                            <input type="submit" class="btn btn-danger" value="Corregir!">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+        <div class="container">
+            <h1 class="display-3">Clasificación</h1>
+            <div class="container-fluid border border-primary rounded">
+                <h1>Femenino</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="/listados/0" class="btn btn-info">Chupetines</a>
+                        <ol id="chupetinesfem"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/1/1" class="btn btn-info">Prebenjamin</a>
+                        <ol id="prebenjaminfem"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/2/1" class="btn btn-info">Benjamin</a>
+                        <ol id="benjaminfem"></ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="/listados/3/1" class="btn btn-info">Alevin</a>
+                        <ol id="alevinfem"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/4/1" class="btn btn-info">Infantil</a>
+                        <ol id="infantilfem"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/5/1" class="btn btn-info">Cadete</a>
+                        <ol id="cadetefem"></ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="/listados/6/1" class="btn btn-info">Junior</a>
+                        <ol id="juniorfem"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/7/1" class="btn btn-info">Senior</a>
+                        <ol id="seniorfem"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/8/1" class="btn btn-info">Veterano</a>
+                        <ol id="veteranofem"></ol>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container-fluid border border-primary rounded">
+                <h1>Masculino</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="/listados/0" class="btn btn-info">Chupetines</a>
+                        <ol id="chupetinesmas"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/1/0" class="btn btn-info">Prebenjamin</a>
+                        <ol id="prebenjaminmas"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/2/0" class="btn btn-info">Benjamin</a>
+                        <ol id="benjaminmas"></ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="/listados/3/0" class="btn btn-info">Alevin</a>
+                        <ol id="alevinmas"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/4/0" class="btn btn-info">Infantil</a>
+                        <ol id="infantilmas"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/5/0" class="btn btn-info">Cadete</a>
+                        <ol id="cadetemas"></ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="/listados/6/0" class="btn btn-info">Junior</a>
+                        <ol id="juniormas"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/7/0" class="btn btn-info">Senior</a>
+                        <ol id="seniormas"></ol>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/listados/8/0" class="btn btn-info">Veterano</a>
+                        <ol id="veteranomas"></ol>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="col-md-2" id="ultimasEntradas">
+        <h3>Entradas</h3>
     </div>
 </div>
-<div class="container-fluid">
-    <h1 class="display-3">Clasificación</h1>
-    <div class="container-fluid border border-primary rounded">
-        <h1>Femenino</h1>
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Chupetines</h2>
-                <ol id="chupetinesfem"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Prebenjamin</h2>
-                <ol id="prebenjaminfem"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Benjamin</h2>
-                <ol id="benjaminfem"></ol>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Alevin</h2>
-                <ol id="alevinfem"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Infantil</h2>
-                <ol id="infantilfem"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Cadete</h2>
-                <ol id="cadetefem"></ol>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Junior</h2>
-                <ol id="juniorfem"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Senior</h2>
-                <ol id="seniorfem"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Veterano</h2>
-                <ol id="veteranofem"></ol>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="container-fluid border border-primary rounded">
-        <h1>Masculino</h1>
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Chupetines</h2>
-                <ol id="chupetinesmas"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Prebenjamin</h2>
-                <ol id="prebenjaminmas"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Benjamin</h2>
-                <ol id="benjaminmas"></ol>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Alevin</h2>
-                <ol id="alevinmas"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Infantil</h2>
-                <ol id="infantilmas"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Cadete</h2>
-                <ol id="cadetemas"></ol>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Junior</h2>
-                <ol id="juniormas"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Senior</h2>
-                <ol id="seniormas"></ol>
-            </div>
-            <div class="col-md-4">
-                <h2>Veterano</h2>
-                <ol id="veteranomas"></ol>
-            </div>
-        </div>
-    </div>
-    <hr>
-</div>
+
 <% include _footer %>

@@ -2,7 +2,7 @@ const express = require("express");
 const csv = require('fast-csv');
 const router = express.Router();
 const {Runner} = require("../models/Runner");
-const {category} = require('../helpers/helpers')
+const {category, SexoToId} = require('../helpers/helpers')
 const nentries = 500;
 
 router.get('/', function (req, res) {
@@ -21,17 +21,18 @@ router.post('/', function (req, res) {
          ignoreEmpty: false
      })
      .on("data", function(data){
-         let anio = parseInt(data[3]);
+         let anio = data[3];
+         let cam = data[6].trim().replace("--","");
          let runner = new Runner({
              dorsal: parseInt(data[0]),
-             apellidos: data[1].trim(),
-             nombre: data[2].trim(),
+             apellidos: data[1].trim() || "Desconocido",
+             nombre: data[2].trim() || "Desconocido",
              fnacimiento: isNaN(anio) ? 2019 : anio,
-             sexo: data[4] === 'MUJER' ? 1 : 0,
+             sexo: SexoToId(data[4].trim()),
              categoria: category(anio),
-             pago: data[6],
-             talla: data[7].trim(),
-             camiseta: (!data[7] || 0 === data[7].length) ? false : true
+             pago: data[5] || 3,
+             talla: cam,
+             camiseta: (!cam || 0 === cam) ? false : true
          });
          runners.push(runner);
          if (runners.length === nentries){

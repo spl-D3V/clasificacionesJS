@@ -24,6 +24,8 @@ window.onload = function(){
     const idDorsal = document.getElementById("dorsal");
     const idDorsalCorregir = document.getElementById("dorsalCorregir");
     const msgAlerta = document.getElementById("mensajeAlerta");
+    const toastContainer = document.getElementById("ultimasEntradas");
+    const btnPdf = document.getElementById("btnPdf");
     // eventos
     formSimple.onsubmit = function(evt){
         evt.preventDefault();
@@ -43,6 +45,7 @@ window.onload = function(){
     socket.on('new-runner', (data)=>{
         if(data.runner){
             rellenarTableros(data.runner);
+            addToast(data.runner);
         }
     });
     socket.on('runner-corregido', (data) => {
@@ -57,9 +60,8 @@ window.onload = function(){
         }
     });
     function rellenarTableros(data){
-        let node = document.createElement("li");
-        let textnode = document.createTextNode(' '+data.dorsal+' : '+data.nombre+' '+data.apellidos);
-        node.appendChild(textnode);
+        const node = document.createElement("li");
+        node.innerText = ' '+data.dorsal+' : '+data.nombre+' '+data.apellidos;
         if(data.sexo === 1){
             switch(data.categoria){
                 case 1:
@@ -120,11 +122,43 @@ window.onload = function(){
             }
         }
         if(data.categoria === 0){
-            let node2 = document.createElement("li");
-            let textnode2 = document.createTextNode(' '+data.dorsal+' : '+data.nombre+' '+data.apellidos);
-            node2.appendChild(textnode2);
+            const node2 = document.createElement("li");
+            node2.innerText = ' '+data.dorsal+' : '+data.nombre+' '+data.apellidos;
             chupFem.appendChild(node2);
             chupMas.appendChild(node);
         }
     }
+
+    function addToast(data){
+        const div = document.createElement("div");
+        div.className = "infoAdd"
+        div.id = data.llegada.toString();
+        div.innerHTML = `<div class="toast" data-autohide="false"><div class="toast-header">
+                            <strong class="btn btn-success mr-auto">${data.dorsal}</strong></div>
+                            <div class="toast-body">${data.nombre} ${data.apellidos}</div></div>`;
+        toastContainer.appendChild(div);
+        const nRunners = document.getElementsByClassName("infoAdd");
+        if (nRunners.length > 5){
+            const ids = [];
+            for (t of nRunners){
+                ids.push(t.id);
+            }
+            const id = ids.reverse().pop();
+            const toastToRemove = document.getElementById(id);
+            toastContainer.removeChild(toastToRemove);
+        }
+        $('.toast').toast("show");
+    };
+
+    btnPdf.addEventListener('click', function(evt){
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "/listados/8/1", true);
+        xhr.onload = function(){
+            resolve(xhr.response);
+        };
+        xhr.onerror = function(){
+            reject({'x':[], 'y':[]});
+        };
+        xhr.send(null);
+    });
 };
